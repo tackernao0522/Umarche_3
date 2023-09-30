@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Auth\Owner\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\Owner\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\Owner\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\Owner\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\Owner\NewPasswordController;
-use App\Http\Controllers\Auth\Owner\PasswordResetLinkController;
-use App\Http\Controllers\Auth\Owner\RegisteredUserController;
-use App\Http\Controllers\Auth\Owner\VerifyEmailController;
+use App\Http\Controllers\Owner\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Owner\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Owner\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Owner\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Owner\Auth\NewPasswordController;
+use App\Http\Controllers\Owner\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Owner\Auth\RegisteredUserController;
+use App\Http\Controllers\Owner\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard:owners');
 })->middleware('auth')->name('dashbord');
 
 Route::middleware('guest')->group(function () {
@@ -42,7 +42,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.update');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:owners')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');
 

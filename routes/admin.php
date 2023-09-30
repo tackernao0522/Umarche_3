@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.welcome');
 });
 
 Route::get('/Dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware('auth:admin')->name('dashboard');
 
 Route::middleware('guest')->group(function () {

@@ -34,6 +34,30 @@ class OwnersTableSeeder extends Seeder
                 'password' => Hash::make('password123'),
                 'created_at' => now(),
             ],
+            [
+                'name' => 'Owner4',
+                'email' => 'owner4@owner.com',
+                'password' => Hash::make('password123'),
+                'created_at' => now(),
+            ],
+            [
+                'name' => 'Owner5',
+                'email' => 'owner5@owner.com',
+                'password' => Hash::make('password123'),
+                'created_at' => now(),
+            ],
+            [
+                'name' => 'Owner6',
+                'email' => 'owner6@owner.com',
+                'password' => Hash::make('password123'),
+                'created_at' => now(),
+            ],
+            [
+                'name' => 'Owner7',
+                'email' => 'owner7@owner.com',
+                'password' => Hash::make('password123'),
+                'created_at' => now(),
+            ],
         ]);
     }
 }

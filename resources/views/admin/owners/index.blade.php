@@ -5,6 +5,7 @@
         </h2>
     </x-slot>
 
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -12,6 +13,7 @@
                     <section class="text-gray-600 body-font">
                         <div class="container px-5 py-24 mx-auto">
                             <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+                                <x-flash-message status="info" />
                                 <div class="flex justify-end mb-4">
                                     <button onclick="location.href='{{ route('admin.owners.create') }}'"
                                         class="text-white bg-purple-500 border-0 py-2 px-8 focus:outline-none hover:bg-purple-600 rounded text-lg">新規登録する</button>

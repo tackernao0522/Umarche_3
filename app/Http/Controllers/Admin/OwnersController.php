@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OwnerStoreRequest;
 use App\Http\Requests\OwnerUpdateRequest;
 use App\Models\Owner;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class OwnersController extends Controller
@@ -25,7 +22,7 @@ class OwnersController extends Controller
      */
     public function index()
     {
-        $owners = Owner::select('id', 'name', 'email', 'created_at')->get();
+        $owners = Owner::select('id', 'name', 'email', 'created_at')->paginate(3);
 
         return view('admin.owners.index', compact('owners'));
     }

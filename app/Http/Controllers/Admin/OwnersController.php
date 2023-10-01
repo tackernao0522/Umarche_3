@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OwnerStoreRequest;
+use App\Http\Requests\OwnerUpdateRequest;
 use App\Models\Owner;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -79,9 +80,19 @@ class OwnersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OwnerUpdateRequest $request, $id)
     {
-        //
+        $owner = Owner::findOrFail($id);
+
+        $owner->name = $request->name;
+        $owner->email = $request->email;
+        $owner->password = Hash::make($request->password);
+        $owner->save();
+
+        return redirect()->route('admin.owners.index')->with(
+            'message',
+            'オーナー情報を更新しました。'
+        );
     }
 
     /**

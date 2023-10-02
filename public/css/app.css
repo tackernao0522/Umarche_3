@@ -855,9 +855,6 @@ select {
 .w-full {
   width: 100%;
 }
-.w-2\/3 {
-  width: 66.666667%;
-}
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -1118,10 +1115,6 @@ select {
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-.py-24 {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
 }
 .py-3 {
   padding-top: 0.75rem;
@@ -1631,10 +1624,6 @@ select {
 }
 @media (min-width: 768px) {
 
-  .md\:mt-4 {
-    margin-top: 1rem;
-  }
-
   .md\:w-2\/3 {
     width: 66.666667%;
   }
@@ -1649,20 +1638,6 @@ select {
 
   .md\:border-t-0 {
     border-top-width: 0px;
-  }
-
-  .md\:p-6 {
-    padding: 1.5rem;
-  }
-
-  .md\:px-5 {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-
-  .md\:px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
   }
 }
 @media (min-width: 1024px) {

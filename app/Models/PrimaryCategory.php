@@ -11,6 +11,6 @@ class PrimaryCategory extends Model
 
     public function secondaries()
     {
-        return $this->hasMany(SecondaryCategroy::class);
+        return $this->hasMany(SecondaryCategory::class);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SecondaryCategroy extends Model
+class SecondaryCategory extends Model
 {
     use HasFactory;
 

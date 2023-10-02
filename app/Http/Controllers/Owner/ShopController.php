@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
@@ -45,5 +46,18 @@ class ShopController extends Controller
 
     public function update(Request $request, $id)
     {
+        Shop::findOrFail($id);
+
+        $imageFile = $request->image;
+
+        // もしからでなかったら及びアップロードできたら
+        if (!is_null($imageFile) && $imageFile->isValid()) {
+            Storage::putFile('public/shops', $imageFile);
+        }
+
+        return redirect()->route('owner.shops.index')->with([
+            'message' => '画像が登録されました。',
+            'status' => 'info',
+        ]);
     }
 }

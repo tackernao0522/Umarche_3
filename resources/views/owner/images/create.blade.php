@@ -26,7 +26,7 @@
                                 <button type="button" onclick="location.href='{{ route('owner.images.index') }}'"
                                     class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
                                 <button type="submit"
-                                    class="text-white bg-purple-500 border-0 py-2 px-8 focus:outline-none hover:bg-purple-600 rounded text-lg">更新する</button>
+                                    class="text-white bg-purple-500 border-0 py-2 px-8 focus:outline-none hover:bg-purple-600 rounded text-lg">登録する</button>
                             </div>
                         </div>
                     </form>

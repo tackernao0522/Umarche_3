@@ -114,7 +114,8 @@ class ImageController extends Controller
         $request->validate([
             'title' => 'string|max:50',
         ], [
-            'title.max' => 'タイトルは、50文字以下で指定してください。'
+            'title.max' => 'タイトルは、50文字以下で指定してください。',
+            'title.string' => 'タイトルは、文字列を指定してください。',
         ]);
 
         $image = Image::findOrFail($id);

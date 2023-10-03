@@ -29,4 +29,9 @@ class Product extends Model
     {
         return $this->belongsTo(Image::class, 'image1', 'id');
     }
+
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
+    }
 }

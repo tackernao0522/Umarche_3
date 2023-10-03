@@ -15,7 +15,69 @@
                         <div class="-m-2">
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
-                                    <select name="category">
+                                    <label for="name" class="leading-7 text-sm text-gray-600">商品名 ※必須</label>
+                                    <input type="text"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        id="name" name="name" value="{{ old('name') }}">
+                                </div>
+                            </div>
+
+                            <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                    <label for="information" class="leading-7 text-sm text-gray-600">商品情報 ※必須</label>
+                                    <textarea name="information" id="information"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        rows="10">{{ old('inforamtion') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                    <label for="price" class="leading-7 text-sm text-gray-600">価格 ※必須</label>
+                                    <input type="number"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        id="price" name="price" value="{{ old('price') }}">
+                                </div>
+                            </div>
+
+                            <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                    <label for="sort_order" class="leading-7 text-sm text-gray-600">表示順</label>
+                                    <input type="number"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        id="sort_order" name="sort_order" value="{{ old('sort_order') }}">
+                                </div>
+                            </div>
+
+                            <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                    <label for="quantity" class="leading-7 text-sm text-gray-600">初期在庫 ※必須</label>
+                                    <input type="number"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        id="quantity" name="quantity" value="{{ old('quantity') }}">
+                                </div>
+                            </div>
+
+                            <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                    <label for="shop_id" class="leading-7 text-sm text-gray-600">販売する店舗</label>
+                                    <select id="shop_id" name="shop_id"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                        @foreach ($shops as $shop)
+                                            <option value="{{ $shop->id }}"
+                                                {{ old('shop_id') == $shop->id ? 'selected' : '' }}>
+                                                {{ $shop->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative">
+                                    <label for="category" class="leading-7 text-sm text-gray-600">カテゴリー</label>
+                                    <select id="category" name="category"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                         <option value="" selected="" disabled="">--カテゴリー選択--</option>
                                         @foreach ($categories as $category)
                                             <optgroup label="{{ $category->name }}">
@@ -35,6 +97,15 @@
                             <x-select-image name="image2" :images="$images" />
                             <x-select-image name="image3" :images="$images" />
                             <x-select-image name="image4" :images="$images" />
+
+                            <div class="p-2 w-1/2 mx-auto">
+                                <div class="relative flex justify-around">
+                                    <div><input type="radio" name="is_selling" value="1" class="mr-2"
+                                            {{ old('is_selling') == 1 ? 'checked' : '' }}>販売中</div>
+                                    <div><input type="radio" name="is_selling" value="0" class="mr-2"
+                                            {{ old('is_selling') == 0 ? 'checked' : '' }}>停止中</div>
+                                </div>
+                            </div>
 
                             <div class="p-2 w-full flex justify-around mt-4">
                                 <button type="button" onclick="location.href='{{ route('owner.products.index') }}'"

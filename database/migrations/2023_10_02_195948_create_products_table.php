@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('information');
             $table->unsignedInteger('price');
-            $table->boolean('id_selling');
+            $table->boolean('is_selling');
             $table->integer('sort_order')->nullable();
             $table->foreignId('secondary_category_id')->constrained()
                 ->onUpdate('cascade')->onDelete('cascade');

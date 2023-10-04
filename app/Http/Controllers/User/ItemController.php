@@ -28,9 +28,9 @@ class ItemController extends Controller
                 'secondary_categories.id'
             )
             ->join('images as image1', 'products.image1', '=', 'image1.id')
-            ->join('images as image2', 'products.image1', '=', 'image2.id')
-            ->join('images as image3', 'products.image1', '=', 'image3.id')
-            ->join('images as image4', 'products.image1', '=', 'image4.id')
+            ->join('images as image2', 'products.image2', '=', 'image2.id')
+            ->join('images as image3', 'products.image3', '=', 'image3.id')
+            ->join('images as image4', 'products.image4', '=', 'image4.id')
             ->where('shops.is_selling', true)
             ->where('products.is_selling', true)
             ->select(

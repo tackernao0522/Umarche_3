@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:users');
-    }
-
     public function index()
     {
         $user = User::findOrFail(Auth::id());
@@ -24,8 +19,6 @@ class CartController extends Controller
         foreach ($products as $product) {
             $totalPrice += $product->price * $product->pivot->quantity;
         }
-
-        dd($products, $totalPrice);
 
         return view('user.cart.index', compact('products', 'totalPrice'));
     }

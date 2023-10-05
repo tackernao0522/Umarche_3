@@ -44,4 +44,15 @@ class CartController extends Controller
             'status' => 'info',
         ]);
     }
+
+    public function delete($id)
+    {
+        Cart::where('product_id', $id)->where('user_id', Auth::id())
+            ->delete();
+
+        return redirect()->route('user.cart.index')->with([
+            'message' => 'カート商品を削除しました。',
+            'status' => 'alert',
+        ]);
+    }
 }

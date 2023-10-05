@@ -4,14 +4,23 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function __construct()
+    public function index()
     {
-        $this->middleware('auth:users');
+        $user = User::findOrFail(Auth::id());
+        $products = $user->products;
+        $totalPrice = 0;
+
+        foreach ($products as $product) {
+            $totalPrice += $product->price * $product->pivot->quantity;
+        }
+
+        return view('user.cart.index', compact('products', 'totalPrice'));
     }
 
     public function add(Request $request)
@@ -29,6 +38,21 @@ class CartController extends Controller
                 'quantity' => $request->quantity,
             ]);
         }
-        dd('テスト');
+
+        return redirect()->route('user.cart.index')->with([
+            'message' => 'カートに商品が追加されました。',
+            'status' => 'info',
+        ]);
+    }
+
+    public function delete($id)
+    {
+        Cart::where('product_id', $id)->where('user_id', Auth::id())
+            ->delete();
+
+        return redirect()->route('user.cart.index')->with([
+            'message' => 'カート商品を削除しました。',
+            'status' => 'alert',
+        ]);
     }
 }

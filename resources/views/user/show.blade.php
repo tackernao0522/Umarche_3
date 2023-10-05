@@ -67,7 +67,39 @@
                             </div>
                         </div>
                     </div>
+                    <div class="border-t border-gray-400 my-8"></div>
+                    <div class="mb-4 text-center">この販売しているショップ</div>
+                    <div class="mb-4 text-center">
+                        {{ $product->shop->name }}
+                    </div>
+                    <div class="mb-4 text-center">
+                        <img src="{{ $product->shop->filename !== null ? asset('storage/shops/' . $product->shop->filename) : '' }}"
+                            alt="" class="mx-auto w-40 h-40 object-cover rounded-full">
+                    </div>
+                    <div class="mb-4 text-center">
+                        <button data-micromodal-trigger="modal-1" href='javascript:;' type="button"
+                            class="text-white bg-gray-400 border-0 py-2 px-6 focus:outline-none hover:bg-gray-500 rounded">ショップの詳細を見る</button>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal micromodal-slide z-10" id="modal-1" aria-hidden="true">
+        <div class="modal__overlay z-10" tabindex="-1" data-micromodal-close>
+            <div class="modal__container z-10" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <header class="modal__header">
+                    <h2 class="text-xl text-gray-700" id="modal-1-title">
+                        {{ $product->shop->name }}
+                    </h2>
+                    <button type="button" aria-label="Close modal" data-micromodal-close class="modal__close"></button>
+                </header>
+                <main class="modal__content" id="modal-1-content">
+                    <p>{{ $product->shop->information }}</p>
+                </main>
+                <footer class="modal__footer">
+                    <button class="modal__btn" type="button" data-micromodal-close
+                        aria-label="Close this dialog window">閉じる</button>
+                </footer>
             </div>
         </div>
     </div>

@@ -61,6 +61,7 @@ class CartController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $products = $user->products;
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
 
         $lineItems = [];
 
@@ -71,11 +72,17 @@ class CartController extends Controller
             if ($product->pivot->quantity > $quantity) {
                 return redirect()->route('user.cart.index');
             } else {
-                $lineItem = [
+                $stripe_products = $stripe->products->create([
                     'name' => $product->name,
                     'description' => $product->information,
-                    'amount' => $product->price,
+                ]);
+                $stripe_price = $stripe->prices->create([
+                    'product' => $stripe_products,
+                    'unit_amount' => $product->price,
                     'currency' => 'jpy',
+                ]);
+                $lineItem = [
+                    'price' => $stripe_price,
                     'quantity' => $product->pivot->quantity,
                 ];
                 array_push($lineItems, $lineItem);
@@ -89,20 +96,15 @@ class CartController extends Controller
                 'quantity' => $product->pivot->quantity * -1,
             ]);
         }
-
-        dd('test');
-
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-        $session = \Stripe\Checkout\Session::create([
-            'payment_method_types' => ['card'],
+        $session = $stripe->checkout->sessions->create([
             'line_items' => [$lineItems],
             'mode' => 'payment',
             'success_url' => route('user.items.index'),
             'cancel_url' => route('user.cart.index'),
         ]);
 
-        $publickey = env('STRIPE_PUBLIC_KEY');
+        $publicKey = env('STRIPE_PUBLIC_KEY');
 
-        return view('user.checkout', compact('session', 'publickey'));
+        return view('user.checkout', compact('session', 'publicKey'));
     }
 }

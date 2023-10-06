@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendOrderdMail;
 use App\Jobs\SendThanksMail;
 use App\Models\Cart;
 use App\Models\Stock;
@@ -61,12 +62,6 @@ class CartController extends Controller
 
     public function checkout()
     {
-        $items = Cart::where('user_id', Auth::id())->get();
-        $products = CartService::getItemsInCart($items);
-
-        $user = User::findOrFail(Auth::id());
-        SendThanksMail::dispatch($products, $user);
-
         $user = User::findOrFail(Auth::id());
         $products = $user->products;
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
@@ -120,6 +115,16 @@ class CartController extends Controller
 
     public function success()
     {
+        $items = Cart::where('user_id', Auth::id())->get();
+        $products = CartService::getItemsInCart($items);
+
+        $user = User::findOrFail(Auth::id());
+        SendThanksMail::dispatch($products, $user);
+
+        foreach ($products as $product) {
+            SendOrderdMail::dispatch($product, $user);
+        }
+
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('user.items.index')->with([

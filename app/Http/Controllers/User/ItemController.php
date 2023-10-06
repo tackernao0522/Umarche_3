@@ -36,8 +36,6 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
-        SendThanksMail::dispatch();
-
         $categories = PrimaryCategory::with('secondaries')->get();
         $products = Product::availableItems()
             ->selectCategory($request->category ?? '0')

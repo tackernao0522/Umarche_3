@@ -89,7 +89,7 @@ class Product extends Model
 
     public function scopeSortOrder($query, $sortOrder)
     {
-        if ($sortOrder === null || $sortOrder === \Constant::SORT_ORDER('recommend')) {
+        if ($sortOrder === null || $sortOrder === \Constant::SORT_ORDER['recommend']) {
             return $query->orderBy('sort_order', 'ASC');
         } elseif ($sortOrder === \Constant::SORT_ORDER['higherPrice']) {
             return $query->orderBy('price', 'DESC');

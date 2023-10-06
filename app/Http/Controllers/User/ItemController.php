@@ -34,7 +34,9 @@ class ItemController extends Controller
     {
         $categories = PrimaryCategory::with('secondaries')->get();
         $products = Product::availableItems()
-            ->sortOrder($request->sort)->paginate($request->pagination ?? '20');
+            ->selectCategory($request->category ?? '0')
+            ->sortOrder($request->sort)
+            ->paginate($request->pagination ?? '20');
 
         return view('user.index', compact('products', 'categories'));
     }
